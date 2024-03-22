@@ -58,11 +58,11 @@ jobs:
       - name: Run Tests
         run: npm run test
         env:
-          TEST_DB_HOST: localhost
-          TEST_DB_USER: admin
-          TEST_DB_PASSWORD: admin
-          TEST_DB_DATABASE: postgres
-          TEST_DB_PORT: 5432
+          SQL_TEST_HOST: localhost
+          SQL_TEST_USER: admin
+          SQL_TEST_PASSWORD: admin
+          SQL_TEST_DB: postgres
+          SQL_TEST_PORT: 5432
           TEST_DB_DIALECT: postgres
-          TEST_JWT_SECRET: my_test_jwt_secret
-          TEST_JWT_EXPIRY: 1h
+          BEARER_TOKEN: BEARER_TOKEN
+          TEST_PORT: 6000
