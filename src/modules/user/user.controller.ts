@@ -33,7 +33,7 @@ export default function userController(router: Router) {
 
     await userService.create(body);
 
-    res.status(201).json(new ResponseDto<UserDto>(200, 'User created', req.originalUrl, undefined, body));
+    res.status(201).json(new ResponseDto<UserDto>(201, 'User created', req.originalUrl, undefined, body));
   });
 
   const createPost = errorAsyncWrapperMiddleware(async (req: Request, res: Response) => {
@@ -47,7 +47,7 @@ export default function userController(router: Router) {
 
     await postService.create(body);
 
-    res.status(201).json(new ResponseDto<PostDto>(200, 'Post created', req.originalUrl, undefined, body));
+    res.status(201).json(new ResponseDto<PostDto>(201, 'Post created', req.originalUrl, undefined, body));
   });
 
   const findPosts = errorAsyncWrapperMiddleware(async (req: Request, res: Response) => {

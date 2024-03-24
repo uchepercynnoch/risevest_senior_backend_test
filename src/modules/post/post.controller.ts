@@ -20,7 +20,7 @@ export default function postController(router: Router) {
 
     await commentService.create(body);
 
-    res.status(201).json(new ResponseDto<CommentDto>(200, 'Comment added', req.originalUrl, undefined, body));
+    res.status(201).json(new ResponseDto<CommentDto>(201, 'Comment added', req.originalUrl, undefined, body));
   });
 
   router.post('/:postId/comments', addComment);
