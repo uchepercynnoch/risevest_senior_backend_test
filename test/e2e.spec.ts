@@ -8,6 +8,7 @@ import supertest, { SuperTest, Test } from 'supertest';
 import {
   AUTH_TOKEN,
   BAD_REQUEST_CODE,
+  CREATED_CODE,
   createFakeCommentsFactory,
   createFakePostsFactory,
   createFakeUsersFactory,
@@ -82,12 +83,12 @@ describe('UsersModule', () => {
         expect(resDto).toHaveProperty('message', `Name ${userDto.name} already exist`);
       });
 
-      it('should succeed with 200 given authentication token when user data is valid', async () => {
+      it('should succeed with 201 given authentication token when user data is valid', async () => {
         const userDto = fakeUsers[0];
 
         const resDto = await fakePostRequest<UserDto, UserDto>(userDto, '/users')(api, AUTH_TOKEN);
 
-        expect(resDto).toHaveProperty('statusCode', OK_CODE);
+        expect(resDto).toHaveProperty('statusCode', CREATED_CODE);
         expect(resDto).toHaveProperty('message', `User created`);
         expect(resDto).toHaveProperty('result', expect.objectContaining(userDto));
       });
@@ -178,13 +179,13 @@ describe('UsersModule', () => {
         expect(resDto).toHaveProperty('message', `Title ${postDto.title} already exist`);
       });
 
-      it('should succeed with 200 given authentication token when post data is valid', async () => {
+      it('should succeed with 201 given authentication token when post data is valid', async () => {
         const postDto = fakePosts[0];
         const data = { title: postDto.title };
 
         const resDto = await fakePostRequest<PostDto, PostDto>(data, `/users/${1}/posts`)(api, AUTH_TOKEN);
 
-        expect(resDto).toHaveProperty('statusCode', OK_CODE);
+        expect(resDto).toHaveProperty('statusCode', CREATED_CODE);
         expect(resDto).toHaveProperty('message', `Post created`);
         expect(resDto).toHaveProperty(
           'result',
@@ -267,13 +268,13 @@ describe('UsersModule', () => {
         expect(responseDto).toHaveProperty('message', UNAUTHORIZED_VALUE);
       });
 
-      it('should succeed with 200 given authentication token when comment data is valid', async () => {
+      it('should succeed with 201 given authentication token when comment data is valid', async () => {
         const commentDto = fakeComments[0];
         const data = { content: commentDto.content };
 
         const resDto = await fakePostRequest<CommentDto, CommentDto>(data, `/posts/${1}/comments`)(api, AUTH_TOKEN);
 
-        expect(resDto).toHaveProperty('statusCode', OK_CODE);
+        expect(resDto).toHaveProperty('statusCode', CREATED_CODE);
         expect(resDto).toHaveProperty('message', `Comment added`);
         expect(resDto).toHaveProperty(
           'result',
